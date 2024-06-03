@@ -62,7 +62,7 @@ export const login = async (req, res) => {
         httpOnly: true,
         // secure: true,
         // sameSite: "none",
-        // path: "/",
+        path: "/"
       })
       .status(200)
       .json(userInfo);
