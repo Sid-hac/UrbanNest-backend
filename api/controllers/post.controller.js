@@ -1,4 +1,5 @@
 import prisma from "../../lib/prisma.js";
+import jwt from "jsonwebtoken";
 
 export const getPosts = async (req, res) => {
   const query = req.query;
@@ -16,9 +17,9 @@ export const getPosts = async (req, res) => {
       },
     });
 
-    setTimeout(() => {
-      res.status(200).json(posts);
-    }, 3000);
+    // setTimeout(() => {
+    res.status(200).json(posts);
+    // }, 3000);
   } catch (error) {
     console.log(error);
     res.status(404).json({ message: "can not find posts" });
@@ -42,10 +43,28 @@ export const getPost = async (req, res) => {
         },
       },
     });
-    res.status(200).json(post);
+
+    const token = req.cookies?.token;
+
+    if (token) {
+      jwt.verify(token, process.env.JWT_SECRET, async (err, payload) => {
+        if (!err) {
+          const saved = await prisma.savedPosts.findUnique({
+            where: {
+              userId_postId: {
+                postId: id,
+                userId,
+              },
+            },
+          });
+        res.status(200).json({ ...post, isSaved: saved ? true : false });
+        }
+      });
+    }
+    res.status(200).json({ ...post, isSaved: false });
   } catch (error) {
     console.log(error);
-    res.status(404).json({ message: "can not find posts" });
+    res.status(404).json({ message: "can not find post" });
   }
 };
 
