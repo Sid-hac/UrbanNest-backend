@@ -31,6 +31,7 @@ export const updateUser = async (req, res) => {
   const { password, avatar, ...inputs } = req.body;
   const tokenUserId = req.userId;
 
+
   if (id !== tokenUserId) {
     return res.status(500).json({ message: "not authorized" });
   }

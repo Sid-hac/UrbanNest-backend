@@ -6,7 +6,7 @@ import { addChat, getChat, getChats, readChat } from "../controllers/chat.contro
 
 const router = express.Router();
 
-router.get('/',  verifytoken , getChats)
+router.get('/',  verifytoken ,  getChats)
 router.get('/:id', verifytoken , getChat)
 router.post('/', verifytoken , addChat)
 router.post('/read/:id', verifytoken , readChat)
