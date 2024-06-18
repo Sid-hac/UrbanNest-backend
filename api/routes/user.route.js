@@ -1,5 +1,5 @@
 import express from "express"
-import { deleteUser, getUser, getUsers, profilePosts, savePost, updateUser } from "../controllers/user.controller.js";
+import { deleteUser, getNotificationNumber, getUser, getUsers, profilePosts, savePost, updateUser } from "../controllers/user.controller.js";
 import { verifytoken } from "../middleware/verifytoken.js";
 
 
@@ -11,7 +11,8 @@ router.get('/', getUsers)
 router.put('/:id', verifytoken, updateUser )
 router.delete('/:id', verifytoken, deleteUser )
 router.post('/save', verifytoken, savePost)
-router.get('/profileposts',profilePosts)
+router.get('/profileposts',verifytoken,profilePosts)
+router.get('/notification', verifytoken, getNotificationNumber)
 
 
 export default router;

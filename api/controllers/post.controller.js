@@ -53,15 +53,16 @@ export const getPost = async (req, res) => {
             where: {
               userId_postId: {
                 postId: id,
-                userId,
+                userId: payload.id,
               },
             },
           });
-        res.status(200).json({ ...post, isSaved: saved ? true : false });
+          res.status(200).json({ ...post, isSaved: saved ? true : false });
         }
       });
+    } else {
+      res.status(200).json({ ...post, isSaved: false });
     }
-    res.status(200).json({ ...post, isSaved: false });
   } catch (error) {
     console.log(error);
     res.status(404).json({ message: "can not find post" });
