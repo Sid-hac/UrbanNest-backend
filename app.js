@@ -10,6 +10,9 @@ import cors from "cors";
 
 const app = express();
 
+
+const port = process.env.PORT || 5000;
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
@@ -21,6 +24,6 @@ app.use("/api/post", postRoute);
 app.use("/api/chat", chatRoute);
 app.use("/api/message", messageRoute);
 
-app.listen(5000, () => {
-  console.log("server is running on port 5000");
+app.listen(port, () => {
+  console.log(`server is running on port ${port}`);
 });
