@@ -17,9 +17,9 @@ export const getPosts = async (req, res) => {
       },
     });
 
-    // setTimeout(() => {
+    setTimeout(() => {
     res.status(200).json(posts);
-    // }, 3000);
+    }, 3000);
   } catch (error) {
     console.log(error);
     res.status(404).json({ message: "can not find posts" });
@@ -37,6 +37,7 @@ export const getPost = async (req, res) => {
         postDetail: true,
         user: {
           select: {
+            id : true,
             username: true,
             avatar: true,
           },
