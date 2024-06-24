@@ -135,7 +135,10 @@ export const profilePosts = async (req, res) => {
     });
 
     const savedPosts = saved.map((item) => item.post);
-
+    // if(savedPosts.length === 0){
+    //   return res.status(200).json({ message: 'No saved posts' });
+    // }
+    
     res.status(200).json({ userPosts, savedPosts });
   } catch (error) {
     console.log(error);
