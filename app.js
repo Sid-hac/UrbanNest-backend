@@ -15,7 +15,9 @@ const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
+app.use(cors({ origin: process.env.VITE_CLIENT_URL, credentials: true }));
+
+console.log( process.env.VITE_CLIENT_URL);
 
 app.use("/api/auth", authRoute);
 app.use("/api/test", testRoute);
